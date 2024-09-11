@@ -139,11 +139,9 @@ function changeFontSize(size) {
 }
 
 let isDragging = false;
-let selectedRange = null;
 let draggedElement = null;
 let startX, startY, initialX, initialY;
 
-// Function to detect mouse down event on selected text
 canvas.addEventListener('mousedown', (event) => {
     const selection = window.getSelection();
     
@@ -152,19 +150,19 @@ canvas.addEventListener('mousedown', (event) => {
         const selectedText = selectedRange.toString();
 
         if (selectedText.trim().length > 0) {
-            event.preventDefault(); // Prevent text selection from being lost
+            event.preventDefault(); 
             
-            // Create a draggable element around selected text
             const span = document.createElement('span');
             span.textContent = selectedText;
             span.style.position = 'absolute';
             span.style.cursor = 'move';
+            span.style.whiteSpace = 'pre'; 
             span.setAttribute('draggable', true);
 
-            // Insert draggable element and remove the original text
             selectedRange.deleteContents();
             selectedRange.insertNode(span);
 
+            // Start dragging
             isDragging = true;
             draggedElement = span;
             startX = event.clientX;
@@ -173,21 +171,22 @@ canvas.addEventListener('mousedown', (event) => {
             const canvasRect = canvas.getBoundingClientRect();
             initialX = draggedElement.offsetLeft;
             initialY = draggedElement.offsetTop;
-
-            
             document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', finalizeDrag);
         }
     }
 });
 
+// Handle dragging with mouse move event
 function handleMouseMove(event) {
     if (isDragging && draggedElement) {
         const canvasRect = canvas.getBoundingClientRect();
         
-        // Calculate the new position of the dragged element
+        
         const deltaX = event.clientX - startX;
         const deltaY = event.clientY - startY;
 
+        
         let newLeft = initialX + deltaX;
         let newTop = initialY + deltaY;
 
@@ -201,16 +200,21 @@ function handleMouseMove(event) {
             newTop = canvasRect.height - draggedElement.offsetHeight; 
         }
 
-      
+        
         draggedElement.style.left = `${newLeft}px`;
         draggedElement.style.top = `${newTop}px`;
     }
 }
 
-// Stop dragging when mouse is released
-document.addEventListener('mouseup', () => {
+// Finalize dragging and drop the text in the new position
+function finalizeDrag() {
     if (isDragging) {
         isDragging = false;
         document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', finalizeDrag);
+        
+       
+        draggedElement.style.position = 'absolute';
+        draggedElement = null; 
     }
-});
+}

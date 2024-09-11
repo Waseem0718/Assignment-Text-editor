@@ -1,0 +1,155 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(38,48,32,1) 0%, rgba(252,255,0,1) 100%, rgba(28,118,208,1) 100%);
+   
+}
+
+.container {
+    text-align: center;
+    bottom: 60px;
+    position: relative;
+
+}
+img{
+    position: relative;
+    right: 450px;
+    top: 90px;
+    clip-path: circle(50%);
+    mix-blend-mode: multiply;
+    width: 50px;
+}
+h1 {
+    font-family: Arial, sans-serif;
+    color: rgb(24, 153, 24);
+    font-size: 36px;
+  
+}
+
+.canvas {
+    width: 400px;  
+    height: 400px; 
+    background-color: white; 
+    margin: 20px auto; 
+    box-shadow: 2px 2px 5px black; 
+    position: relative;
+}
+#font-select{
+    border-radius: 10px ;
+    box-shadow: 2px 2px 5px black; 
+}
+.controls {
+    margin-bottom: 10px;
+}
+
+button, select {
+    background-color: white;
+    padding: 3px;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 12px;
+}
+
+button i, select {
+    margin-right: 5px;
+    
+}
+
+button:hover, select:hover {
+    background-color: #f0f0f0;
+}
+
+.font-size-controls {
+    display: inline-block;
+    line-height: 0%;
+
+}
+
+.font-size-controls button {
+    
+    background-color: white;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.font-size-controls button:hover {
+    background-color: #f0f0f0;
+}
+
+#font-size {
+    width: 30px;
+    height: 15px;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 3px;
+    margin: 0 5px;
+    position: relative;
+    top: 2px;
+}
+
+/* Alignment Dropdown */
+.align-dropdown {
+    display: inline-block;
+    position: relative;
+    
+    
+}
+
+.align-options {
+    display: none;
+    position: absolute;
+    padding: 3px;
+    top: 100%;
+    left: 0;
+    background-color: white;
+   
+    z-index: 1;
+    width: 100%;
+   
+}
+
+.align-options button {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.align-options button:hover {
+    background-color: #f0f0f0;
+}
+
+.align-toggle {
+    background-color: white;
+    padding: 3px;
+    cursor: pointer;
+}
+
+/* Align dropdown hover to show options */
+.align-dropdown:hover .align-options {
+    display: flex;
+}
+
+/* Undo/Redo Button Styling */
+#undo, #redo {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 50px;
+    background-color: white;
+}
+
+#undo:hover, #redo:hover {
+    background-color: #f0f0f0;
+}
+
+#add-text {
+    box-shadow: 2px 2px 5px black;
+    background-color: white;
+    border-radius: 5px;
+}

@@ -1,16 +1,14 @@
-// Undo/Redo Stacks remain the same
 let canvas = document.getElementById('canvas');
 
 let undoStack = [];
 let redoStack = [];
 
-// Store initial state of canvas
 undoStack.push(canvas.innerHTML);
 
-// Track changes on keypress to enable character-by-character undo/redo
+
 canvas.addEventListener('input', function() {
     undoStack.push(canvas.innerHTML);
-    redoStack = []; // Clear redo stack when a new action is performed
+    redoStack = [];
 });
 
 // Undo functionality
@@ -66,11 +64,11 @@ const alignmentActions = {
 
 Object.entries(alignmentActions).forEach(([btnId, command]) => {
     document.getElementById(btnId).addEventListener('click', () => {
-        // Apply the text alignment using document.execCommand
+        
         document.execCommand(command, false, null);
         changeAlignIcon(`fas fa-${btnId}`);
         
-        // Clear the selection to prevent the text from disappearing
+     
         clearSelection();
     });
 });
@@ -84,9 +82,9 @@ const changeAlignIcon = (newIcon) => {
 function clearSelection() {
     if (window.getSelection) {
         const selection = window.getSelection();
-        selection.removeAllRanges(); // Clear any selection ranges
+        selection.removeAllRanges(); 
     } else if (document.selection) {
-        document.selection.empty();  // For older browsers
+        document.selection.empty(); 
     }
 }
 
@@ -102,7 +100,6 @@ document.getElementById("font-select").addEventListener("change", function () {
 // Font size controls: Numeric input and buttons
 const fontSizeInput = document.getElementById('font-size');
 
-// Listen for changes to the input field
 fontSizeInput.addEventListener('input', () => {
     changeFontSize(parseInt(fontSizeInput.value));
 });
@@ -168,7 +165,6 @@ canvas.addEventListener('mousedown', (event) => {
             selectedRange.deleteContents();
             selectedRange.insertNode(span);
 
-            // Start dragging
             isDragging = true;
             draggedElement = span;
             startX = event.clientX;
@@ -178,13 +174,12 @@ canvas.addEventListener('mousedown', (event) => {
             initialX = draggedElement.offsetLeft;
             initialY = draggedElement.offsetTop;
 
-            // Listen for mousemove to drag the element
+            
             document.addEventListener('mousemove', handleMouseMove);
         }
     }
 });
 
-// Handle dragging with mouse move event
 function handleMouseMove(event) {
     if (isDragging && draggedElement) {
         const canvasRect = canvas.getBoundingClientRect();
@@ -193,7 +188,6 @@ function handleMouseMove(event) {
         const deltaX = event.clientX - startX;
         const deltaY = event.clientY - startY;
 
-        // Check boundaries
         let newLeft = initialX + deltaX;
         let newTop = initialY + deltaY;
 
@@ -207,7 +201,7 @@ function handleMouseMove(event) {
             newTop = canvasRect.height - draggedElement.offsetHeight; 
         }
 
-        // Set the new position
+      
         draggedElement.style.left = `${newLeft}px`;
         draggedElement.style.top = `${newTop}px`;
     }
